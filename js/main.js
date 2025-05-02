@@ -1,10 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Three.js 3D Background
-    initThreeJS();
-    
-    // 3D Rotating Cube in About Section
-    initRotatingCube();
-    
     // Navigation
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav ul');
@@ -13,14 +7,17 @@ document.addEventListener('DOMContentLoaded', function() {
         nav.classList.toggle('active');
     });
     
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('active');
+        });
+    });
+    
     // Smooth Scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            if (this.classList.contains('nav-link')) {
-                nav.classList.remove('active');
-            }
             
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
@@ -29,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Scroll Animation
-    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeElements = document.querySelectorAll('.project-card, .skill-category, .contact-card');
     
     const fadeInOnScroll = function() {
         fadeElements.forEach(element => {
@@ -43,25 +40,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
+    // Initialize elements as transparent
+    fadeElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
     window.addEventListener('scroll', fadeInOnScroll);
     fadeInOnScroll(); // Initialize
-    
-    // Project Card Tilt Effect
-    if (document.querySelector('.project-card')) {
-        VanillaTilt.init(document.querySelectorAll('.project-card'), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            'max-glare': 0.2,
-        });
-    }
-    
-    // Typewriter Effect
-    if (document.querySelector('.typewriter')) {
-        setTimeout(() => {
-            document.querySelector('.typewriter').style.borderRight = 'none';
-        }, 3500);
-    }
     
     // Form Submission
     const contactForm = document.querySelector('.contact-form');
@@ -72,20 +59,20 @@ document.addEventListener('DOMContentLoaded', function() {
             this.reset();
         });
     }
+    
+    // Initialize Three.js if the elements exist
+    if (document.getElementById('threejs-bg')) {
+        initThreeJS();
+    }
+    
+    if (document.getElementById('rotating-cube')) {
+        initRotatingCube();
+    }
 });
 
 // Three.js Background Animation
 function initThreeJS() {
     const container = document.getElementById('threejs-bg');
-    if (!container) return;
-    
-    // Set container to cover entire screen
-    container.style.position = 'fixed';
-    container.style.top = '0';
-    container.style.left = '0';
-    container.style.width = '100vw';
-    container.style.height = '100vh';
-    container.style.zIndex = '-1';
     
     // Create scene
     const scene = new THREE.Scene();
@@ -145,12 +132,7 @@ function initThreeJS() {
 
 // 3D Rotating Cube in About Section
 function initRotatingCube() {
-    const container = document.querySelector('.rotating-cube');
-    if (!container) return;
-    
-    // Set container size
-    container.style.width = '100%';
-    container.style.height = '100%';
+    const container = document.getElementById('rotating-cube');
     
     // Create scene
     const scene = new THREE.Scene();
