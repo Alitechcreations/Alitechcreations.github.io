@@ -1,0 +1,136 @@
+/* Base Styles */
+:root {
+    --primary: #6c63ff;
+    --secondary: #4d44db;
+    --dark: #1e1e2c;
+    --light: #f8f9fa;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+/* 3D Background Canvas */
+#3d-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+/* Navigation */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    padding: 1rem 2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    padding-top: 80px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+.btn.primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn.secondary {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+/* Project Cards */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.project-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img img {
+    transform: scale(1.1);
+}
+
+/* Contact Form */
+.contact form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
